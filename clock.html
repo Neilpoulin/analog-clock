@@ -1,0 +1,345 @@
+
+<html>
+<head>
+	<title>New Tab </title>
+</head>
+<style>
+	body {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		width: 100%;
+		align-items: center;
+		background-color: #5f2a2a;
+	}
+	.clock{
+		border-radius: 50%;
+		width: 50vh;
+		height: 50vh;
+		border: 30px solid black;
+		position: relative;
+		background: #fff url(clockface.svg) no-repeat center;		
+		background-size: calc(100% - 70px);
+		box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.49), 0px 8px 15px rgba(0, 0, 0, 0.49), 0px 8px 15px rgba(0, 0, 0, 0.49) inset;
+	}
+
+	.tick {
+		position: absolute;
+		height: 100%;		
+		width: 2px;
+	 	left: calc(50% - 1px);
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+	}
+
+	.tick:nth-child(5n + 0){
+		width: 6px;		
+		left: calc(50% - 3px);
+	}
+
+
+	.tick:nth-child(5n + 0) .marker{
+		height: 20px;
+	}
+
+	.marker {		
+		background-color: black;
+		height: 15px;
+		width: 100%;
+		text-align: center;
+	}
+
+	.signature{
+		position: absolute;
+		width: 100%;
+		text-align: center;
+		top: 55%;
+		font-family: Luminari, fantasy;
+	}
+
+	.tick:nth-child( n + 1){
+		   transform: rotate(6deg);
+	}
+
+	.tick:nth-child( n + 2){
+		   transform: rotate(calc(2 * 6deg));
+	}
+
+	.tick:nth-child( n + 3){
+		   transform: rotate(calc(3 * 6deg));
+	}
+
+	.tick:nth-child( n + 4){
+		   transform: rotate(calc(4 * 6deg));
+	}
+
+	.tick:nth-child( n + 5){
+		   transform: rotate(calc(5 * 6deg));
+	}
+
+	.tick:nth-child( n + 6){
+		 transform: rotate(calc(6 * 6deg));
+	}
+
+	.tick:nth-child( n + 7){
+		 transform: rotate(calc(7 * 6deg));
+	}
+
+	.tick:nth-child( n + 8){
+		 transform: rotate(calc(8 * 6deg));
+	}
+
+	.tick:nth-child( n + 9){
+		 transform: rotate(calc(9 * 6deg));
+	}
+
+	.tick:nth-child( n + 10){
+		 transform: rotate(calc(10 * 6deg));
+	}
+
+	.tick:nth-child( n + 11){
+		   transform: rotate(calc(11 * 6deg));
+	}
+
+	.tick:nth-child( n + 12){
+		   transform: rotate(calc(12 * 6deg));
+	}
+
+	.tick:nth-child( n + 13){
+		   transform: rotate(calc(13 * 6deg));
+	}
+
+	.tick:nth-child( n + 14){
+		   transform: rotate(calc(14 * 6deg));
+	}
+
+	.tick:nth-child( n + 15){
+		   transform: rotate(calc(15 * 6deg));
+	}
+
+	.tick:nth-child( n + 16){
+		 transform: rotate(calc(16* 6deg));
+	}
+
+	.tick:nth-child( n + 17){
+		 transform: rotate(calc(17 * 6deg));
+	}
+
+	.tick:nth-child( n + 18){
+		 transform: rotate(calc(18 * 6deg));
+	}
+
+	.tick:nth-child( n + 19){
+		 transform: rotate(calc(19 * 6deg));
+	}
+
+	.tick:nth-child( n + 20){
+		 transform: rotate(calc(20 * 6deg));
+	}
+
+	.tick:nth-child( n + 20){
+		 transform: rotate(calc(20 * 6deg));
+	}
+
+	.tick:nth-child( n + 21){
+		 transform: rotate(calc(21 * 6deg));
+	}
+
+	.tick:nth-child( n + 22){
+		 transform: rotate(calc(22 * 6deg));
+	}
+
+	.tick:nth-child( n + 23){
+		 transform: rotate(calc(23 * 6deg));
+	}
+
+	.tick:nth-child( n + 24){
+		 transform: rotate(calc(24 * 6deg));
+	}
+
+	.tick:nth-child( n + 25){
+		 transform: rotate(calc(25 * 6deg));
+	}
+
+	.tick:nth-child( n + 26){
+		 transform: rotate(calc(26 * 6deg));
+	}
+
+	.tick:nth-child( n + 27){
+		 transform: rotate(calc(27 * 6deg));
+	}
+
+	.tick:nth-child( n + 28){
+		 transform: rotate(calc(28 * 6deg));
+	}
+
+	.tick:nth-child( n + 29){
+		 transform: rotate(calc(29 * 6deg));
+	}
+
+	.tick:nth-child( n + 30){
+		 transform: rotate(calc(30 * 6deg));
+	}
+
+
+	.center {		
+			position: absolute;
+			display: flex;		
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			height: 100%;
+			width: 100%;			
+	}
+
+	.hands {		
+			position: absolute;
+			display: flex;		
+			flex-direction: row;
+			justify-content: center;
+			align-items: flex-end;
+			height: 50%;
+			width: 100%;
+			transform-origin: bottom center;			
+			transition: all 1s linear;
+	}
+
+	#secondHand {
+		  transition: transform 0.2s cubic-bezier(.4,2.08,.55,.44);
+		  z-index: 5;
+		  margin-bottom: -10px;
+	}
+
+	.centerMarker {
+		width: 20px;
+		height: 20px;		
+		background-color: black;
+		z-index: 5;
+		border-radius: 50%;
+	}
+
+	.centerMarkerRed {
+		width: 7px;
+		height: 7px;		
+		background-color: red;
+		z-index: 6;
+		border-radius: 50%;
+	}
+
+	.hands > div {
+		display: flex;
+		justify-content: flex-end;		
+		box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.55);
+	}
+
+	.hour{
+		width: 10px;
+		background-color: black;
+		height: 50%;
+		border-radius: 15px;
+	}
+
+	.minute{
+		width: 5px;
+		background-color: black;
+		height: 76%;
+		border-radius: 15px;
+	}
+
+	.second {
+		width: 3px;
+		background-color: red;
+		height: 75%;
+		border-radius: 15px;
+	}
+
+
+
+</style>
+<body>
+	<div class="clock">
+		<div class="tickContainer">
+			<div class="tick"><div class="marker"></div>  <div class="marker"></div></div>
+			<div class="tick"><div class="marker"></div>  <div class="marker"></div></div>
+			<div class="tick"><div class="marker"></div>  <div class="marker"></div></div>
+			<div class="tick"><div class="marker"></div>  <div class="marker"></div></div>
+			<div class="tick"><div class="marker"></div>  <div class="marker"></div></div>			
+			<div class="tick"><div class="marker"></div>  <div class="marker"></div></div>
+			<div class="tick"><div class="marker"></div>  <div class="marker"></div></div>
+			<div class="tick"><div class="marker"></div>  <div class="marker"></div></div>
+			<div class="tick"><div class="marker"></div>  <div class="marker"></div></div>
+			<div class="tick"><div class="marker"></div>  <div class="marker"></div></div>			
+			<div class="tick"><div class="marker"></div>  <div class="marker"></div></div>
+			<div class="tick"><div class="marker"></div>  <div class="marker"></div></div>
+			<div class="tick"><div class="marker"></div>  <div class="marker"></div></div>
+			<div class="tick"><div class="marker"></div>  <div class="marker"></div></div>
+			<div class="tick"><div class="marker"></div>  <div class="marker"></div></div>
+			<div class="tick"><div class="marker"></div>  <div class="marker"></div></div>
+			<div class="tick"><div class="marker"></div>  <div class="marker"></div></div>
+			<div class="tick"><div class="marker"></div>  <div class="marker"></div></div>
+			<div class="tick"><div class="marker"></div>  <div class="marker"></div></div>
+			<div class="tick"><div class="marker"></div>  <div class="marker"></div></div>
+			<div class="tick"><div class="marker"></div>  <div class="marker"></div></div>
+			<div class="tick"><div class="marker"></div>  <div class="marker"></div></div>
+			<div class="tick"><div class="marker"></div>  <div class="marker"></div></div>
+			<div class="tick"><div class="marker"></div>  <div class="marker"></div></div>
+			<div class="tick"><div class="marker"></div>  <div class="marker"></div></div>
+			<div class="tick"><div class="marker"></div>  <div class="marker"></div></div>
+			<div class="tick"><div class="marker"></div>  <div class="marker"></div></div>
+			<div class="tick"><div class="marker"></div>  <div class="marker"></div></div>
+			<div class="tick"><div class="marker"></div>  <div class="marker"></div></div>
+			<div class="tick"><div class="marker"></div>  <div class="marker"></div></div>
+		</div>
+		<div class="signature">Poulin</div>
+		
+		<div class="center">
+			<div class="centerMarker"></div>	
+		</div>
+		<div class="center">
+			<div class="centerMarkerRed"></div>	
+		</div>
+		<div class="hands" style="transform: rotate(20deg);" id="hourHand">
+			<div class="hour"></div>
+		</div>
+		<div class="hands" id="minuteHand">
+			<div class="minute"></div>			
+		</div>
+		<div class="hands" id="secondHand">
+			<div class="second"></div>
+		</div>
+	</div>
+	<script type="text/javascript">
+		var hourHand = document.getElementById("hourHand");		
+		var minuteHand = document.getElementById("minuteHand");
+		var secondHand = document.getElementById("secondHand");
+
+		var d = new Date();
+		var secondDeg = 360 / 60 * d.getSeconds() ;
+		
+			
+
+		window.setInterval(() => setHands(), 1000)
+		setHands();
+
+
+
+		function setHands(){
+			var d = new Date();
+			
+			secondDeg += 6;
+			
+			var minuteDeg = 360 / 60 * d.getMinutes() + d.getSeconds()/60;
+			
+			var hourDeg = 360 / 12 * (d.getHours() - 12 + d.getMinutes()/60);
+
+			secondHand.style = "transform: rotateZ(" + secondDeg +"deg);";	
+			
+			hourHand.style = "transform: rotate(" + hourDeg +"deg);";				
+			minuteHand.style = "transform: rotate(" + minuteDeg +"deg);";
+			
+		}
+
+	</script>
+</body>
+</html>
