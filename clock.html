@@ -50,11 +50,14 @@
 		text-align: center;
 	}
 
-	.signature{
+	.clockInfo {
 		position: absolute;
 		width: 100%;
 		text-align: center;
 		top: 55%;
+	}
+
+	.signature{	
 		font-family: Luminari, fantasy;
 	}
 
@@ -254,10 +257,18 @@
 		border-radius: 15px;
 	}
 
+	#currentTemp {
+		color: black;
+		font-size: 2rem;
+	}
 
+	#weatherDescription {
+		color: black;
+		font-size: 1rem;
+	}
 
 </style>
-<body>
+<body>	
 	<div class="clock">
 		<div class="tickContainer">
 			<div class="tick"><div class="marker"></div>  <div class="marker"></div></div>
@@ -291,7 +302,11 @@
 			<div class="tick"><div class="marker"></div>  <div class="marker"></div></div>
 			<div class="tick"><div class="marker"></div>  <div class="marker"></div></div>
 		</div>
-		<div class="signature">Poulin</div>
+		<div class="clockInfo">
+			<div class="signature">Poulin</div>
+			<div id="currentTemp"></div>
+			<div id="weatherDescription"></div>
+		</div>
 		
 		<div class="center">
 			<div class="centerMarker"></div>	
@@ -310,6 +325,9 @@
 		</div>
 	</div>
 	<script type="text/javascript">
+		//weather api via https://home.openweathermap.org/api_keys
+		var apiKey = "bbb8ce8e17c4cdd3a6dbcf2e8d5cd5e7";
+		var cityName = "Denver";
 		var hourHand = document.getElementById("hourHand");		
 		var minuteHand = document.getElementById("minuteHand");
 		var secondHand = document.getElementById("secondHand");
@@ -319,10 +337,11 @@
 		
 			
 
-		window.setInterval(() => setHands(), 1000)
+		window.setInterval(() => setHands(), 1000);
+		window.setInterval(() => showWeather(), 1200000) // every 20 minutes refresh weather
+
 		setHands();
-
-
+		showWeather();
 
 		function setHands(){
 			var d = new Date();
@@ -338,6 +357,23 @@
 			hourHand.style = "transform: rotate(" + hourDeg +"deg);";				
 			minuteHand.style = "transform: rotate(" + minuteDeg +"deg);";
 			
+		}
+
+
+		function showWeather(){
+			fetch("http://api.openweathermap.org/data/2.5/find?q=" + cityName + "&units=imperial&appid=" + apiKey)
+			.then(result => result.json())
+			.then(result => {
+				console.log('weather data', result);
+				var today = result.list[0];
+				console.log('today', today);
+				let currentTemp = today.main.temp;
+				console.log('currentTemp - rounded', Math.round(currentTemp));
+				document.getElementById("currentTemp").innerHTML = Math.round(currentTemp) + "&deg;";
+				let weatherDescription = today.weather[0].description;
+				console.log('weather description', weatherDescription);
+				document.getElementById('weatherDescription').innerHTML = weatherDescription;
+			})
 		}
 
 	</script>
